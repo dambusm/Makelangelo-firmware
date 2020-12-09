@@ -1153,7 +1153,7 @@ void clockISRProfile() {
 */
 char segment_buffer_full() {
   int next_segment = get_next_segment(last_segment);
-  return (next_segment == current_segment);
+  return (next_segment == current_segment) && next_segment != 0;
 }
 
 
