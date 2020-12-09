@@ -60,7 +60,7 @@ int FK(long *motorStepArray,float *cartesian) {
   float theta = ((a*a+b*b-c*c)/(2.0*a*b));
   
   cartesian[0] = theta * a + left;
-  /*
+  
   Serial.print("ymax=");   Serial.println(top);
   Serial.print("theta=");  Serial.println(theta);
   Serial.print("a=");      Serial.println(a);
@@ -68,14 +68,14 @@ int FK(long *motorStepArray,float *cartesian) {
   Serial.print("c=");      Serial.println(c);
   Serial.print("S0=");     Serial.println(motorStepArray[0]);
   Serial.print("S1=");     Serial.println(motorStepArray[1]);
-  */
+  
   cartesian[1] = top - sqrt( 1.0 - theta * theta ) * a;
   cartesian[2] = motorStepArray[2];
-  /*
+  
   Serial.print("C0=");      Serial.println(cartesian[0]);
   Serial.print("C1=");      Serial.println(cartesian[1]);
   Serial.print("C2=");      Serial.println(cartesian[2]);
-  */
+  
   return 0;
 }
 
@@ -273,14 +273,16 @@ void robot_findHome() {
     
   #endif  // HAS_TMC2130
   
-  //Serial.println(F("Estimating position..."));
+  Serial.println(F("Estimating position..."));
   long count[NUM_MUSCLES];
   count[0] = calibrateLeft/MM_PER_STEP;
   count[1] = calibrateRight/MM_PER_STEP;
   count[2] = axies[2].pos;
-  //Serial.print("cl=");        Serial.println(calibrateLeft);
-  //Serial.print("cr=");        Serial.println(calibrateRight);
-  //Serial.print("t*1000=");    Serial.println(MM_PER_STEP*1000);
+  Serial.print("calibrateleft=");        Serial.println(calibrateLeft);
+  Serial.print("calibrateright=");        Serial.println(calibrateRight);
+  Serial.print("countl="); Serial.println(count[0]);
+  Serial.print("countr="); Serial.println(count[1]);
+  Serial.print("count2="); Serial.println(count[2]);
 
   // current position is...
   float offset[NUM_AXIES];
@@ -420,7 +422,7 @@ void makelangelo6Setup() {
 
 
 /**
-   D11 makelangelo 5 specific setup call
+    makelangelo 5 specific setup call
 */
 void makelangelo5Setup() {
   // if you accidentally upload m3 firmware to an m5 then upload it ONCE with this line uncommented.

@@ -217,7 +217,7 @@ void lineSafe(float *pos, float new_feed_rate_mms) {
   // guarantee we stop exactly at the destination (no rounding errors).
   motor_line(pos, new_feed_rate_mms,segment_len_mm);
 
-//  Serial.print("P");  Serial.println(movesPlanned());
+  Serial.print("P");  Serial.println(movesPlanned());
 }
 
 
@@ -305,7 +305,9 @@ void setHome(float *pos) {
   for (i = 0; i < NUM_AXIES; ++i) {
     axies[i].homePos = pos[i];
   }
+  Serial.println("Saving home in eeprom");
   eepromManager.saveHome();
+  Serial.println("Saved.");
 }
 
 
@@ -452,19 +454,7 @@ void loop() {
   // if Arduino hasn't received a new instruction in a while, send ready() again
   // just in case USB garbled ready and each half is waiting on the other.
   if ( !segment_buffer_full() && (millis() - parser.lastCmdTimeMs ) > TIMEOUT_OK ) {
-#ifdef HAS_TMC2130
-    {
-      uint32_t drv_status = driver_0.DRV_STATUS();
-      uint32_t stallValue = (drv_status & SG_RESULT_bm) >> SG_RESULT_bp;
-      Serial.print(stallValue, DEC);
-      Serial.print('\t');
-    }
-    {
-      uint32_t drv_status = driver_1.DRV_STATUS();
-      uint32_t stallValue = (drv_status & SG_RESULT_bm) >> SG_RESULT_bp;
-      Serial.println(stallValue, DEC);
-    }
-#endif
+    Serial.print("parser ready");
     parser.ready();
   }
 

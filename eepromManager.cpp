@@ -128,7 +128,7 @@ void EEPROMManager::saveHome() {
 
 
 void EEPROMManager::loadHome() {
-  //Serial.print(F("Loading home:"));
+  Serial.print(F("Loading home:"));
   int j=ADDR_HOME;
   for(ALL_AXIES(i)) {
     axies[i].homePos = (float)readLong(j)/100.0f;

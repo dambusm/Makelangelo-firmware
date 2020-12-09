@@ -648,11 +648,24 @@ void Parser::G04() {
    Teleport mental position
 */
 void Parser::G92() {
+  Serial.print("G92!");
+  Serial.print("\n");
   int i;
   float pos[NUM_AXIES];
   for (i = 0; i < NUM_AXIES; ++i) {
+    Serial.print(i);
+    Serial.print("\n");
     float p = axies[i].pos;
+    Serial.print(p);
+    Serial.print("\n");
+    Serial.print(AxisNames[i]);
+    Serial.print("\n");
+    Serial.print(absolute_mode);
+    Serial.print("\n");
+    Serial.print(parseNumber(AxisNames[i], (absolute_mode ? p : 0)) + (absolute_mode ? 0 : p));
+    Serial.print("\n");
     pos[i] = parseNumber(AxisNames[i], (absolute_mode ? p : 0)) + (absolute_mode ? 0 : p);
+    Serial.print("done");
   }
   teleport(pos);
 }
