@@ -191,6 +191,8 @@ void polargraph_homeAtSpeed(int delayTime) {
   // reel in the left motor and the right motor out until contact is made.
   digitalWrite(MOTOR_0_DIR_PIN, STEPPER_DIR_LOW);
   digitalWrite(MOTOR_1_DIR_PIN, STEPPER_DIR_LOW);
+  digitalWrite(LIMIT_SWITCH_PIN_LEFT, HIGH);
+  digitalWrite(LIMIT_SWITCH_PIN_RIGHT, HIGH);
   int left = 0, right = 0;
   do {
     if (left == 0) {
@@ -260,7 +262,7 @@ void robot_findHome() {
     // back off a bit
     digitalWrite(MOTOR_0_DIR_PIN, STEPPER_DIR_HIGH);
     digitalWrite(MOTOR_1_DIR_PIN, STEPPER_DIR_HIGH);
-    for(int i=0;i<500;++i) {
+    for(int i=0;i<3000;++i) {
         digitalWrite(MOTOR_0_STEP_PIN, HIGH);
         digitalWrite(MOTOR_0_STEP_PIN, LOW);
       
