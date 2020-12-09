@@ -1,0 +1,7 @@
+{
+    "programmer": "ArduinoISP",
+    "board": "arduino:avr:mega",
+    "configuration": "cpu=atmega2560",
+    "port": "/dev/tty.usbmodem144301",
+    "sketch": "Makelangelo-firmware.ino"
+}
