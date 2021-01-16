@@ -91,6 +91,7 @@
 
 //extern void calibrateBelts();
 extern void recordHome();
+extern void printAll();
 
 // convert belt length to cartesian position, save that as home pos.
 extern void calibrationToPosition();

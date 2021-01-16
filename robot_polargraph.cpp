@@ -8,6 +8,49 @@
 
 #if MACHINE_STYLE == POLARGRAPH
 
+void printAll() {
+  Serial.print("MACHINE_STYLE: ");      Serial.println(MACHINE_STYLE);
+  Serial.print("LCD_TYPE: ");     Serial.println(LCD_TYPE);
+  Serial.print("MOTHERBOARD: ");     Serial.println(MOTHERBOARD);
+  Serial.print("NUM_MOTORS: ");      Serial.println(NUM_MOTORS);
+  Serial.print("MAX_MOTORS: ");      Serial.println(MAX_MOTORS);
+  Serial.print("NUM_SERVOS: ");      Serial.println(NUM_SERVOS);
+  Serial.print("MAX_BOARD_SERVOS: ");      Serial.println(MAX_BOARD_SERVOS);
+  Serial.print("NUM_MUSCLES: ");     Serial.println(NUM_MUSCLES);
+  Serial.print("MAX_SEGMENTS: ");      Serial.println(MAX_SEGMENTS);
+  Serial.print("NORMAL_MOTOR_STEPS: ");      Serial.println(NORMAL_MOTOR_STEPS);
+  Serial.print("MICROSTEPS: ");      Serial.println(MICROSTEPS);
+  Serial.print("PULLEY_PITCH: ");      Serial.println(PULLEY_PITCH);
+  Serial.print("FIRMWARE_VERSION: ");      Serial.println(FIRMWARE_VERSION);
+  Serial.print("SIZEOF_FLOAT_BYTES: ");      Serial.println(SIZEOF_FLOAT_BYTES);
+  Serial.print("SIZEOF_LONG_BYTES: ");     Serial.println(SIZEOF_LONG_BYTES);
+  Serial.print("robot_uid: ");     Serial.println(robot_uid);
+  Serial.print("calibrateRight: ");      Serial.println(calibrateRight);
+  Serial.print("calibrateLeft: ");     Serial.println(calibrateLeft);
+  Serial.print("feed_rate: ");     Serial.println(feed_rate);
+  Serial.print("acceleration: ");      Serial.println(acceleration);
+  Serial.print("step_delay: ");      Serial.println(step_delay);
+  Serial.print("ADDR_UUID: ");     Serial.println(ADDR_UUID);
+  Serial.print("EEPROM_UUID_LENGTH: ");      Serial.println(EEPROM_UUID_LENGTH);
+  Serial.print("ADDR_LIMITS: ");     Serial.println(ADDR_LIMITS);
+  Serial.print("EEPROM_LIMITS_LENGTH: ");      Serial.println(EEPROM_LIMITS_LENGTH);
+  Serial.print("ADDR_HOME: ");     Serial.println(ADDR_HOME);
+  Serial.print("EEPROM_HOME_LENGTH: ");      Serial.println(EEPROM_HOME_LENGTH);
+  Serial.print("ADDR_CALIBRATION_LEFT: ");     Serial.println(ADDR_CALIBRATION_LEFT);
+  Serial.print("ADDR_CALIBRATION_LENGTH: ");      Serial.println(ADDR_CALIBRATION_LENGTH);
+  Serial.print("ADDR_CALIBRATION_RIGHT: ");      Serial.println(ADDR_CALIBRATION_RIGHT);
+  Serial.print("ADDR_PID: ");      Serial.println(ADDR_PID);
+  Serial.print("EEPROM_PID_LENGTH: ");      Serial.println(EEPROM_PID_LENGTH);
+  for(ALL_AXIES(i)) {
+    Serial.print("Axis "); Serial.println(AxisNames[i]); 
+    Serial.print("limitMax: ");      Serial.println(axies[i].limitMax);
+    Serial.print("limitMin: ");      Serial.println(axies[i].limitMin);
+    Serial.print("pos: ");      Serial.println(axies[i].pos);
+    Serial.print("homePos: ");      Serial.println(axies[i].homePos);
+  }
+  
+}
+
 /**
  * Inverse Kinematics turns XY coordinates into step counts from each motor
  * @param axies the cartesian coordinate
@@ -233,6 +276,7 @@ void robot_findHome() {
 #endif
 
   Serial.println(F("Find Home..."));
+  printAll();
 
   #ifdef HAS_TMC2130
   	delay(500);
@@ -296,6 +340,7 @@ void robot_findHome() {
   float pos[NUM_AXIES];
   offset[0]=axies[0].homePos;
   offset[1]=axies[1].homePos;
+  printAll();
   lineSafe( offset, feed_rate );
   
   Serial.println(F("Done."));

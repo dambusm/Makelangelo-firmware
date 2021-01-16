@@ -302,7 +302,9 @@ void teleport(float *pos) {
 
 void setHome(float *pos) {
   int i;
+  Serial.println("Set home to:");
   for (i = 0; i < NUM_AXIES; ++i) {
+    Serial.println(pos[i]);
     axies[i].homePos = pos[i];
   }
   Serial.println("Saving home in eeprom");

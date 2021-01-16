@@ -228,6 +228,7 @@ void Parser::processCommand() {
       case 110:  lineNumber = parseNumber('N', lineNumber);  break;
       case 112:  M112();  break;
       case 114:  M114();  break;
+      case 115: printAll(); break;
 #ifdef HAS_LCD
       case 117:  M117();  break;
 #endif
@@ -266,6 +267,7 @@ void Parser::processCommand() {
       case 10:  // get hardware version
         Serial.print(F("D10 V"));
         Serial.println(MACHINE_HARDWARE_VERSION);
+        printAll();
         break;
 #ifdef MACHINE_HAS_LIFTABLE_PEN
       case 13:  setPenAngle(parseNumber('Z', axies[2].pos));  break;
